@@ -41,7 +41,7 @@ const HomePage = () => {
 
       try {
         const response = await axios.get(
-          "https://kinopoiskapiunofficial.tech/api/v2.2/films",
+          "jhttps://kinopoiskapiunofficial.tech/api/v2.2/films",
           {
             params,
             headers: {

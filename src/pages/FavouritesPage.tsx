@@ -3,11 +3,11 @@ import { Modal } from "../components/Modal";
 import { Card } from "../components/Card";
 import EmptyState from "../components/EmptyState";
 import { useWatch } from "../context/WatchContext";
-import type { Film } from "../context/WatchContext"; // импортируем тип Film
+import type { Film } from "../context/WatchContext";
 
 const FavouritesPage = () => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedFilm, setSelectedFilm] = useState<Film | null>(null); // указываем тип
+  const [selectedFilm, setSelectedFilm] = useState<Film | null>(null);
 
   const { toggleFilm, watchListStore: watchList } = useWatch();
 
@@ -47,10 +47,7 @@ const FavouritesPage = () => {
             ))}
           </div>
         ) : (
-          <EmptyState
-            title="В избранном ничего не найдено. Попробуйте вернуться на главную и добавить фильм"
-            emoji="🔍"
-          />
+          <EmptyState title="В избранном ничего не найдено" emoji="🔍" />
         )}
         <Modal
           visible={showModal}
