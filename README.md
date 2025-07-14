@@ -1,4 +1,4 @@
-# t1_tasks
+# react-movie-ts
 
 ## 📌 Описание
 
