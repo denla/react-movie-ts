@@ -47,7 +47,7 @@ const FavouritesPage = () => {
             ))}
           </div>
         ) : (
-          <EmptyState title="В избранном ничего не найдено" emoji="🔍" />
+          <EmptyState title="В избранном ничего не найдено" />
         )}
         <Modal
           visible={showModal}
