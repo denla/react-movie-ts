@@ -45,11 +45,11 @@ export const Filters = ({ visible, setVisible }) => {
     );
   };
 
-  const handleRatingSlider = (e, newValue) => {
+  const handleRatingSlider = (_e, newValue) => {
     setRatingRange(newValue);
   };
 
-  const handleYearSlider = (e, newValue) => {
+  const handleYearSlider = (_e, newValue) => {
     setYearRange(newValue);
   };
 
