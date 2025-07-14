@@ -6,6 +6,7 @@
 Реализовано на React, TypeScript, Vite и [Kinopoisk API Unofficial](https://kinopoiskapiunofficial.tech/).
 
 🔗 **Деплой:**
+[https://react-movie-ts-delta.vercel.app/](https://react-movie-ts-delta.vercel.app/).
 
 **Стек:**
 
@@ -22,8 +23,8 @@
 1. **Клонировать репозиторий:**
 
 ```bash
-git clone https://github.com/your-username/t1_tasks.git
-cd t1_tasks
+git clone https://github.com/denla/react-movie-ts.git
+cd movie-app-ts
 ```
 
 2. **Установить зависимости:**
