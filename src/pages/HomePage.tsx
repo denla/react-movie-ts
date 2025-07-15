@@ -1,13 +1,17 @@
 import { useState, useEffect, useCallback } from "react";
-import { Card } from "../components/Card";
+import Card from "../components/Card";
 import { useSearchParams } from "react-router-dom";
 import { filmsData } from "../data/filmsData";
 import key from "../config";
-import { Modal } from "../components/Modal";
+import Modal from "../components/Modal";
 import CardLoader from "../components/skeletons/CardLoader";
-import { useWatch } from "../context/WatchContext";
+// import { useWatch } from "../context/WatchListStore";
+
 import Search from "../components/Search";
 import axios from "axios";
+
+import { observer } from "mobx-react-lite";
+import { watchStore } from "../context/WatchStore";
 
 const HomePage = () => {
   const [top, setTop] = useState(filmsData);
@@ -25,7 +29,7 @@ const HomePage = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedFilm, setSelectedFilm] = useState(null);
 
-  const { toggleFilm } = useWatch();
+  // const { toggleFilm } = useWatch();
 
   useEffect(() => {
     const fetchFilms = async () => {
@@ -69,7 +73,7 @@ const HomePage = () => {
   // Modal
   const confirmAddToWatchList = (e) => {
     e.preventDefault();
-    toggleFilm(selectedFilm);
+    watchStore.toggleFilm(selectedFilm);
     setShowModal(false);
   };
 
@@ -141,4 +145,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default observer(HomePage);

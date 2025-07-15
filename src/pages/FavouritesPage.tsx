@@ -1,19 +1,19 @@
 import { useState } from "react";
-import { Modal } from "../components/Modal";
-import { Card } from "../components/Card";
+import Modal from "../components/Modal";
+import Card from "../components/Card";
 import EmptyState from "../components/EmptyState";
-import { useWatch } from "../context/WatchContext";
-import type { Film } from "../context/WatchContext";
+import { observer } from "mobx-react-lite";
+import { watchStore } from "../context/WatchStore";
+
+import type { Film } from "../types/types";
 
 const FavouritesPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedFilm, setSelectedFilm] = useState<Film | null>(null);
 
-  const { toggleFilm, watchListStore: watchList } = useWatch();
-
   const handleRemove = () => {
     if (selectedFilm) {
-      toggleFilm(selectedFilm);
+      watchStore.toggleFilm(selectedFilm);
     }
     setShowModal(false);
   };
@@ -26,9 +26,9 @@ const FavouritesPage = () => {
     <div className="main">
       <div className="content">
         <h1>Избранное</h1>
-        {watchList?.length ? (
+        {watchStore.watchList?.length ? (
           <div className="cards">
-            {watchList.map((film) => (
+            {watchStore.watchList.map((film) => (
               <Card
                 key={film.kinopoiskId}
                 obj={{
@@ -60,4 +60,4 @@ const FavouritesPage = () => {
   );
 };
 
-export default FavouritesPage;
+export default observer(FavouritesPage);

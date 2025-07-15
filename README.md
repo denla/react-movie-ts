@@ -14,6 +14,7 @@
 
 - React
 - TypeScript
+- MobX
 - Vite
 - React Router
 - Axios

@@ -2,28 +2,17 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import ratingIcon from "../images/icon-star-black.svg";
 import key from "../config";
-import { useWatch } from "../context/WatchContext";
 import axios from "axios";
 
-interface Genre {
-  genre: string;
-}
+import { watchStore } from "../context/WatchStore";
+import { observer } from "mobx-react-lite";
 
-interface Film {
-  posterUrl: string;
-  nameRu: string;
-  year: number;
-  ratingKinopoisk: number;
-  genres: Genre[];
-  description: string;
-  kinopoiskId: number;
-}
+import type { Film } from "../types/types";
 
 const FilmPage = () => {
   const { filmId } = useParams<{ filmId: string }>();
   const [currentFilm, setCurrentFilm] = useState<Film | null>(null);
   const [loading, setLoading] = useState(true);
-  const { isInWatchList, toggleFilm } = useWatch();
 
   useEffect(() => {
     if (!filmId) return;
@@ -84,13 +73,13 @@ const FilmPage = () => {
                 className="btn-main"
                 style={{ width: "fit-content" }}
                 onClick={() =>
-                  toggleFilm({
+                  watchStore.toggleFilm({
                     ...currentFilm,
                     year: String(currentFilm.year),
                   })
                 }
               >
-                {isInWatchList(Number(filmId))
+                {watchStore.isInWatchList(Number(filmId))
                   ? "Удалить из списка"
                   : "Посмотрю"}
               </button>
@@ -109,4 +98,4 @@ const FilmPage = () => {
   );
 };
 
-export default FilmPage;
+export default observer(FilmPage);

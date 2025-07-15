@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import starIcon from "../images/icon-star.svg";
-import { useWatch } from "../context/WatchContext";
+// import { useWatch } from "../context/WatchContext";
 import CoverLoader from "./skeletons/CoverLoader";
+
+import { observer } from "mobx-react-lite";
+import { watchStore } from "../context/WatchStore";
 
 const RemoveIcon = () => (
   <svg
@@ -15,7 +18,7 @@ const RemoveIcon = () => (
   </svg>
 );
 
-export const Card = ({
+const Card = ({
   obj: { posterUrl, nameRu, year },
   rating,
   filmId,
@@ -23,7 +26,7 @@ export const Card = ({
 }) => {
   const location = useLocation();
   const [isCoverLoading, setIsCoverLoading] = useState(true);
-  const { isInWatchList } = useWatch();
+  // const { isInWatchList } = useWatch();
 
   useEffect(() => {
     setIsCoverLoading(true);
@@ -60,15 +63,19 @@ export const Card = ({
       </Link>
       <button
         aria-label={
-          isInWatchList(filmId) ? "Удалить из списка" : "Добавить в список"
+          watchStore.isInWatchList(filmId)
+            ? "Удалить из списка"
+            : "Добавить в список"
         }
         onClick={(e) => {
           e.preventDefault();
           onAddClick(filmId);
         }}
       >
-        {isInWatchList(filmId) ? "Удалить" : "Посмотрю"}
+        {watchStore.isInWatchList(filmId) ? "Удалить" : "Посмотрю"}
       </button>
     </div>
   );
 };
+
+export default observer(Card);

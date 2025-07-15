@@ -1,8 +1,8 @@
 import closeIcon from "../images/icon-close.svg";
-import { useWatch } from "../context/WatchContext";
+import { watchStore } from "../context/WatchStore";
+import { observer } from "mobx-react-lite";
 
-export const Modal = ({ visible, currentFilm, onConfirm, onCancel }) => {
-  const { isInWatchList } = useWatch();
+const Modal = ({ visible, currentFilm, onConfirm, onCancel }) => {
   return (
     <div
       className={`modal-overlay ${!visible && `modal-hidden`} `}
@@ -15,7 +15,7 @@ export const Modal = ({ visible, currentFilm, onConfirm, onCancel }) => {
         {currentFilm && (
           <div className="modal-title">
             <span>
-              {isInWatchList(currentFilm.kinopoiskId)
+              {watchStore.isInWatchList(currentFilm.kinopoiskId)
                 ? "Удалить из избранного?"
                 : "Добавить в избранное?"}
             </span>
@@ -44,3 +44,5 @@ export const Modal = ({ visible, currentFilm, onConfirm, onCancel }) => {
     </div>
   );
 };
+
+export default observer(Modal);
